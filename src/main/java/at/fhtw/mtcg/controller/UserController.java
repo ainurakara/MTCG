@@ -21,10 +21,10 @@ public class UserController implements RestController {
             request.getPathParts().size() > 1) {
             return this.userService.getUser(request.getPathParts().get(1));
         } else if (request.getMethod() == Method.GET) {
-            return this.userService.getWeatherPerRepository();
+            return this.userService.getUserPerRepository();
         } else if (request.getMethod() == Method.POST) {
 
-            return this.userService.addWeather(request);
+            return this.userService.addUser(request);
         }
 
         return new Response(

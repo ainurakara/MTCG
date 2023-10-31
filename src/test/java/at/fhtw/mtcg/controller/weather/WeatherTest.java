@@ -1,6 +1,6 @@
 package at.fhtw.mtcg.controller.weather;
 
-import at.fhtw.mtcg.model.Weather;
+import at.fhtw.mtcg.model.User;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -25,8 +25,8 @@ class WeatherTest {
         try {
             //Weather[] weatherList = new ObjectMapper().readValue(bufferedReader.readLine(), Weather[].class);
             //assertEquals(3, weatherList.length);
-            List<Weather> weatherList = new ObjectMapper().readValue(bufferedReader.readLine(), new TypeReference<List<Weather>>(){});
-            assertEquals(3, weatherList.size());
+            List<User> userList = new ObjectMapper().readValue(bufferedReader.readLine(), new TypeReference<List<User>>(){});
+            assertEquals(3, userList.size());
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
@@ -54,9 +54,9 @@ class WeatherTest {
         InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
         BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
         try {
-            Weather weather = new ObjectMapper().readValue(bufferedReader.readLine(), Weather.class);
-            assertEquals(1, weather.getId());
-            assertEquals("Vienna", weather.getCity());
+            User user = new ObjectMapper().readValue(bufferedReader.readLine(), User.class);
+            assertEquals(1, user.getId());
+            //assertEquals("Vienna", weather.getCity());
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }

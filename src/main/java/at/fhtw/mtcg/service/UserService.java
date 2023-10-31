@@ -21,7 +21,7 @@ public class UserService extends AbstractService {
     // GET /weather(:id
     public Response getUser(String id)
     {
-        System.out.println("get weather for id: " + id);
+        System.out.println("get user for id: " + id);
         User user = userRepository.findById(Integer.parseInt(id));
         String json = null;
         try {

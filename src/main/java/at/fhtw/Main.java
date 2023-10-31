@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
-        Server server = new Server(10001, configureRouter());
+        Server server = new Server(80, configureRouter());
         try {
             server.start();
         } catch (IOException e) {
@@ -20,7 +20,7 @@ public class Main {
     private static Router configureRouter()
     {
         Router router = new Router();
-        router.addService("/weather", new UserController());
+        router.addService("/user", new UserController());
         router.addService("/echo", new EchoController());
 
         return router;
