@@ -18,7 +18,7 @@ public class UserService extends AbstractService {
         userRepository = new UserRepositoryImpl(new UnitOfWork());
     }
 
-    // GET /weather(:id
+    // GET /user(:id
     public Response getUser(String id)
     {
         System.out.println("get user for id: " + id);
@@ -31,20 +31,25 @@ public class UserService extends AbstractService {
         }
         return new Response(HttpStatus.OK, ContentType.JSON, json);
     }
-    // GET /weather
-    public Response getUser() {
-        return new Response(HttpStatus.NOT_IMPLEMENTED);
-    }
 
-    // POST /weather
+    // POST /user
     public Response addUser(Request request) {
-        return new Response(HttpStatus.NOT_IMPLEMENTED);
+
+        System.out.println("add " + request.getParams() + "to  database");
+        if (this.userRepository.addUser(request))
+        {
+            return new Response(HttpStatus.OK);
+        }
+        else
+        {
+            return new Response(HttpStatus.CONFLICT);
+        }
     }
 
-    // GET /weather
+    // GET /user
     public Response getUserPerRepository() {
         System.out.println("getUserPerRepository");
-        User user = new User(1, "Ainura", "123");
+        User user = new User("Ainura", "123");
         String json = null;
         try {
             json = this.getObjectMapper().writeValueAsString(user);

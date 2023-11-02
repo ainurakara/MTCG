@@ -1,5 +1,6 @@
 package at.fhtw.mtcg.persistence.repository;
 
+import at.fhtw.httpserver.server.Request;
 import at.fhtw.mtcg.persistence.DataAccessException;
 import at.fhtw.mtcg.persistence.UnitOfWork;
 import at.fhtw.mtcg.model.User;
@@ -15,6 +16,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     public UserRepositoryImpl(UnitOfWork unitOfWork)
     {
+
         this.unitOfWork = unitOfWork;
     }
 
@@ -23,7 +25,7 @@ public class UserRepositoryImpl implements UserRepository {
         try (PreparedStatement preparedStatement =
                      this.unitOfWork.prepareStatement("""
                     select * from public.user
-                    where id = ?
+                    where id = 1
                 """))
         {
             preparedStatement.setInt(1, id);
@@ -32,7 +34,6 @@ public class UserRepositoryImpl implements UserRepository {
             while(resultSet.next())
             {
                 user = new User(
-                        resultSet.getInt(1),
                         resultSet.getString(2),
                         resultSet.getString(3));
             };
@@ -56,7 +57,6 @@ public class UserRepositoryImpl implements UserRepository {
             while(resultSet.next())
             {
                 User user = new User(
-                        resultSet.getInt(1),
                         resultSet.getString(2),
                         resultSet.getString(3));
                 userRows.add(user);
@@ -65,6 +65,21 @@ public class UserRepositoryImpl implements UserRepository {
             return userRows;
         } catch (SQLException e) {
             throw new DataAccessException("Select nicht erfolgreich", e);
+        }
+    }
+
+    @Override
+    public boolean addUser (Request request){
+
+        String username = request.getParams();
+        String pwd = request.getParams();
+
+        try (PreparedStatement preparedStatement = this.unitOfWork.prepareStatement("insert into user (username, password) values (?,?)")) {
+            preparedStatement.setString(1, username );
+            preparedStatement.setString(2, pwd);
+            return true;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 }

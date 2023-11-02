@@ -10,9 +10,9 @@ public class UserDao {
 
     public UserDao() {
         userData = new ArrayList<>();
-        userData.add(new User(1,"Ainura","123"));
-        userData.add(new User(2,"Daria","456"));
-        userData.add(new User(3,"Monica","789"));
+        userData.add(new User("Ainura","123"));
+        userData.add(new User("Daria","456"));
+        userData.add(new User("Monica","789"));
     }
 
     // GET /weather/:id

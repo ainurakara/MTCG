@@ -5,14 +5,18 @@ import at.fhtw.httpserver.utils.Router;
 import at.fhtw.mtcg.controller.EchoController;
 import at.fhtw.mtcg.controller.UserController;
 
+
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Server server = new Server(80, configureRouter());
+
+        Server server = new Server(10001, configureRouter());
         try {
             server.start();
-        } catch (IOException e) {
+        } catch (
+                IOException e) {
             e.printStackTrace();
         }
     }
